@@ -1,6 +1,6 @@
 //**************SMART BUCKET SYSTEM******************//
-//****CREATED BY:MUHAMMAD TAHA|03343992626**********//
-//*****************PROJEXEL************************//
+//************CREATED BY:MUHAMMAD TAHA**************//
+//*************************************************//
 
 //****PIN CONFIGURATION****//
 //   COMPONENT  ARDUINO_PIN
