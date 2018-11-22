@@ -1,17 +1,6 @@
 //**************SMART SHOPPING CART******************//
 //************CREATED BY:MUHAMMAD TAHA**************//
-//*************************************************//
-
-//****PIN CONFIGURATION****//
-//   COMPONENT  ARDUINO_PIN
-//   RST/Reset   RST    D9
-//   SPI SS      SDA    D10
-//   SPI MOSI    MOSI   D11
-//   SPI MISO    MISO   D12
-//   SPI SCK     SCK    D13
-//   LCD 20x4   *SCL & SDA*
-//   HC-05              D3,D2 (BTserial)
-//   Buzzer             D4
+//**************************************************//
 
 #include <SoftwareSerial.h>
 #include <Wire.h>
@@ -93,37 +82,6 @@ void setup()
 //*******************************MAIN LOOP*************************************//
 void loop()
 {
-  name1 = " ";
-  cmp = ' ';
-  c = ' ';
-
-  lcd.setCursor(0, 0);
-  lcd.print("SMART BUCKET SYSTEM");
-  lcd.setCursor(0, 2);
-  lcd.print("WAIT FOR PRODUCT.");
-  lcd.setCursor(17, 2);
-  lcd.print("..");
-  lcd.setCursor(0, 3);
-  lcd.print("TOTAL AMOUNT: ");
-  lcd.setCursor(14, 3);
-  lcd.print(total);
-
-  if (BTserial.available())   //BLUETOOTH
-  {
-    bread = BTserial.read() ;
-    if (bread == 'x')
-    {
-      BTserial.println("QUIAD-E-AWAM UNIVERSITY");
-      BTserial.println("SMART BUCKET SYSTEM");
-      BTserial.println("");
-      BTserial.print("TOTAL AMOUNT:");
-      BTserial.print(total);
-      BTserial.print("/= PKR");
-      BTserial.println("");
-      BTserial.println("*****ITEM DETAILS*****");
-      item();
-    }
-  }
 
   // Prepare key - all keys are set to FFFFFFFFFFFFh at chip delivery from the factory.
   MFRC522::MIFARE_Key key;
@@ -428,87 +386,6 @@ void loop()
     flag6 = 1;
   }
 
-  if (cmp == '6' && flag6 == 1)
-  {
-    lcd.clear();
-    lcd.setCursor(0, 0);
-    lcd.print("**REMOVE FROM CART**");
-    lcd.setCursor(0, 1);
-    lcd.print("EVERYDAY 1KG");
-    lcd.setCursor(0, 2);
-    lcd.print("PRICE: 890 PKR");
+  
 
-    out();
-    delay(3000);
-    lcd.clear();
-
-    total = total - 890;
-    cmp = ' ';
-    flag6 = 0;
-  }
-
-}
-
-//*************************USER DEFINE FUNCTIONS(UDF)**********************************//
-void item()
-{
-  if (flag1 == 1)
-  {
-    BTserial.print("TAPAL DANEDAAR 250mg | ");
-    BTserial.println("Rs:210/=");
-  }
-  if (flag2 == 1)
-  {
-    BTserial.print("NIDO 1kg | ");
-    BTserial.println("Rs:910/=");
-  }
-  if (flag3 == 1)
-  {
-    BTserial.print("COLGATE 250mg | ");
-    BTserial.println("Rs:180/=");
-  }
-  if (flag4 == 1)
-  {
-    BTserial.print("DALDA 5kg | ");
-    BTserial.println("Rs:950/=");
-  }
-  if (flag5 == 1)
-  {
-    BTserial.print("BLUEBAND 250gm | ");
-    BTserial.println("Rs:145/=");
-  }
-  if (flag6 == 1)
-  {
-    BTserial.print("EVERYDAY 1kg | ");
-    BTserial.println("Rs:890/=");
-  }
-  delay(100);
-}
-
-void inn()
-{
-  digitalWrite(4, HIGH);
-  delay(80);
-  digitalWrite(4, LOW);
-  delay(80);
-  digitalWrite(4, HIGH);
-  delay(80);
-  digitalWrite(4, LOW);
-  delay(80);
-  digitalWrite(4, HIGH);
-  delay(80);
-  digitalWrite(4, LOW);
-}
-
-void out()
-{
-  digitalWrite(4, HIGH);
-  delay(100);
-  digitalWrite(4, LOW);
-  delay(100);
-  digitalWrite(4, HIGH);
-  delay(100);
-  digitalWrite(4, LOW);
-  delay(100);
-}
 
